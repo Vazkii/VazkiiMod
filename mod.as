@@ -23,6 +23,35 @@ function displayCornerMessage(msg) { // Function called for displaying the item 
 	displayCornerMessageOrig(newmsg); // Call the original function after our changes to the message have passsed
 }
 
+function firr(trg) { // Function called for calculating tear rate, completely overriden as code needs to be inserted in the middle
+	var v3 = _level0.a.ups[6] * 1.5 + (_level0.a.ups[32] + _level0.a.ups[80] + _level0.a.ups[1] + _level0.a.ups[120]) * 0.7 + (_level0.a.ups[196] + _level0.a.ups[59] - _level0.a.ups[182]) * 0.4 + (_level0.a.ups[101] + _level0.a.ups[90] + _level0.a.ups[189]) * 0.2;
+	
+	// Add tear rate for Tootpicks
+	v3 += _level0.a.ups[183] * 0.3 + _level0.a.ups[12] * 0.2;
+
+	if (_level0.a.ups[120]) {
+	  ++v3;
+	}
+	
+	if (_level0.a.skiner == 6) {
+	  v3 -= 0.25;
+	}
+	f1 = Math.sqrt(Math.max(0, 1 + v3 * 1.3));
+	_level0.a.trg.fire = Math.max(5, 16 - f1 * 6 - Math.min(v3, 0) * 6);
+	if (_level0.a.ups[69]) {
+	  _level0.a.trg.fire *= 0.8;
+	}
+	if (_level0.a.ups[2]) {
+	  _level0.a.trg.fire *= 2.1;
+	  _level0.a.trg.fire += 3;
+	}
+	if (_level0.a.trixx(39)) {
+	  _level0.a.trg.fire -= 2;
+	}
+	if (_level0.a.trg == _level0.a.player) {
+	  _level0.a.firra = _level0.a.trg.fire;
+	}
+}
 
 // INIT ==============================================================================================
 
@@ -44,6 +73,8 @@ function overrideFunctions() { // Overrides the functions in vanilla isaac with 
 	
 	displayCornerMessageOrig = _level0.a.st22;
 	_level0.a.st22 = displayCornerMessage;
+	
+	_level0.a.firr = firr;
 }
 
 function setupCustomDescriptions() { // Setup our custom descriptions to override the vanilla ones (or missing ones)
@@ -76,6 +107,7 @@ function setupCustomDescriptions() { // Setup our custom descriptions to overrid
 	customDescriptions[172] = "Just a prick..."; // Sacrificial Dagger
 	customDescriptions[174] = "All the way"; // Rainbow Baby
 	customDescriptions[179] = "Do you believe?"; // Fate
+	customDescriptions[183] = "Tears + Tear Speed"; // Tooth Picks
 	customDescriptions[188] = "On the other side"; // Abel
 	customDescriptions[190] = "Burn baby burn"; // Pyro
 	customDescriptions[195] = "Medic!!"; // Mom's Coin Purse
