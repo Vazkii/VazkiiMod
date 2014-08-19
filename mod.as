@@ -124,12 +124,12 @@ function messWithPools() { // Called to change items around in the item pools
 		regularPool.push(175);
 	}
 	
-	poolRemove(regularPool, 6); // Move Number One to the Secret Room Pool
+	poolRemove(regularPool, 6); // Move Number One to theSsecret Room Pool
 	secretRoomPool.push(6);
 	
-	if(_level0.locker[38] && _level0.skiner != 0 && _level0.chala == 0 && random(4) == 0) { // If the D6 is unlocked, the player isn't playing as Isaac and not playing a challenge try adding D6 to the Devil Pool
+	if(_level0.locker[38] && _level0.skiner != 0 && _level0.chala == 0 && random(10) == 0) { // If the D6 is unlocked, the player isn't playing as Isaac and not playing a challenge try adding D6 to the Devil Pool
 		devilRoomPool.push(105);
-	} else if(_level0.locker[65] && random(3) == 0) { // If the D6 wasn't in the Devil Pool and the D20 is unlocked, try adding it to the Devil Pool
+	} else if(_level0.locker[65] && random(8) == 0) { // If the D6 wasn't in the Devil Pool and the D20 is unlocked, try adding it to the Devil Pool
 		devilRoomPool.push(166);
 	}
 	

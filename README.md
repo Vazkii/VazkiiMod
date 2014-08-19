@@ -18,5 +18,5 @@ Vazkii's Mod for The Binding of Isaac. Just a bunch of game tweaks
   - Forget Me Now: +Shop (20% chance).
   - Dad's Key: Secret Room -> Item Room.
   - Number One: Item Room -> Secret Room.
-  - D6: +Devil Room (25% chance if not Isaac and not in a challenge run).
-  - D20: +Devil Room (33% chance if the D6 isn't in the Devil Room pool already).
+  - D6: +Devil Room (10% chance if not Isaac and not in a challenge run).
+  - D20: +Devil Room (12.5% chance if the D6 isn't in the Devil Room pool already).
