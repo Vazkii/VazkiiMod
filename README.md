@@ -25,3 +25,10 @@ Vazkii's Mod for The Binding of Isaac. Just a bunch of game tweaks
   - Spelunker Hat: Item Room - > Shop.
   
 ### Get the mod [Here](http://vazkii.us/mod/isaac/VazkiiMod.zip)!
+To install, you need the latest SpiderMod.
+ - Download the .zip file.
+ - Extract the contents of the .zip into the Plugins folder where you have SpiderMod.
+ - Load up SpiderMod.
+ - Click on "Plugins" in the top.
+ - Check "Enable Plugins".
+ - Click "Settings" and enable "VazkiiMod", disable the others if you don't want them.
