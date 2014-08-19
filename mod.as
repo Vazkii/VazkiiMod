@@ -26,7 +26,7 @@ function displayCornerMessage(msg) { // Function called for displaying the item 
 function firr(trg) { // Function called for calculating tear rate, completely overriden as code needs to be inserted in the middle
 	var v3 = _level0.a.ups[6] * 1.5 + (_level0.a.ups[32] + _level0.a.ups[80] + _level0.a.ups[1] + _level0.a.ups[120]) * 0.7 + (_level0.a.ups[196] + _level0.a.ups[59] - _level0.a.ups[182]) * 0.4 + (_level0.a.ups[101] + _level0.a.ups[90] + _level0.a.ups[189]) * 0.2;
 	
-	// Add tear rate for Tootpicks
+	// Add tear rate for Tootpicks and Magic Mushroom
 	v3 += _level0.a.ups[183] * 0.3 + _level0.a.ups[12] * 0.2;
 
 	if (_level0.a.ups[120]) {
