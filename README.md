@@ -23,3 +23,5 @@ Vazkii's Mod for The Binding of Isaac. Just a bunch of game tweaks
   - D6: +Devil Room (10% chance if not Isaac and not in a challenge run).
   - D20: +Devil Room (12.5% chance if the D6 isn't in the Devil Room pool already).
   - Spelunker Hat: Item Room - > Shop.
+  
+### Get the mod [Here](http://vazkii.us/mod/isaac/VazkiiMod.zip)!
