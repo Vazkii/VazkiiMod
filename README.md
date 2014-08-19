@@ -8,3 +8,4 @@ Vazkii's Mod for The Binding of Isaac. Just a bunch of game tweaks
 - Changed descriptions of some items to be more accurate;
 - Magic Mushroom and Toothpicks are now tear ups (0.2 and 0.3 respectively) as well as their old stats;
 - You can enter the Chest without the Polaroid;
+- Moved the Notched Axe from the Shop Pool to the Item Room Pool;

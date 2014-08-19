@@ -3,13 +3,17 @@ var powerlevelOrig = undefined;
 var displayCornerMessageOrig = undefined;
 var balljunkOrig = undefined;
 var playerhurtOrig = undefined;
-var haveTrinketOrig = undefined;
+var trixxOrig = undefined;
+var itemzzOrig = undefined;
+var giveitOrig = undefined;
 
 // VARIABLES =========================================================================================
 var customDescriptions = Array(); // An array of all our custom item descriptions
 var pickedUpID = -1; // The ID of the last item picked up
 var alwaysPolaroid = false; // Should the polaroid always be counted as equipped? Used to allow entrance to the chest without it
 var takingDamage = false; // Is the player taking damage?
+var refreshing = false; // Will the next item pool call be a pool refresh?
+var messedWithItempools = false; // Have we made our modifications to the item pools yet?
 
 // OVERRIDES =========================================================================================
 
@@ -70,8 +74,66 @@ function playerhurt(f1, f2, f3) { // Called when the player is hurt, just to pre
 	takingDamage = false;
 }
 
-function haveTrinket(id) { // Checks if the player has a trinket. Overriding so it allows for entering the chest without the polaroid
-	return (id == 47 && alwaysPolaroid && !takingDamage) || haveTrinketOrig(id);
+function trixx(id) { // Checks if the player has a trinket. Overriding so it allows for entering the chest without the polaroid
+	return (id == 47 && alwaysPolaroid && !takingDamage) || trixxOrig(id);
+}
+
+function itemzz() { // Called when the Item Pools are filled, overrided to change them around
+	itemzzOrig();
+	if(refreshing) {
+		messWithPools(); // The Item Pool was refreshed, let's mess with it again
+	}
+	refreshing = true;
+}
+
+function giveit() { // Called when an item is generated
+	if(!messedWithItempools) {
+		messWithPools();
+	}
+	
+	return giveitOrig();
+}
+
+// FUNCTIONS =========================================================================================
+
+function messWithPools() { // Called to change items around in the item pools
+	var regularPool = _level0.ittt; // Let's keep the pool names somewhat sane
+	var bossPool = _level0.ittt2;
+	var secretRoomPool = _level0.ittt3;
+	var shopPool = _level0.ittt4;
+	var goldenChestPool = _level0.ittt6;
+	var devilRoomPool = _level0.ittt7;
+	var arenaPool = _level0.ittt8;
+	var libraryPool = _level0.ittt9;
+	var godRoomPool = _level0.ittt10;
+
+	poolRemove(shopPool, 147); // Move Notched Axe from the Shop Pool to the treasure Pool
+	regularPool.push(147);
+	
+	messedWithItempools = true;
+}
+
+function poolRemove(pool, id) { // Remove an item from a pool
+	var index = indexOf(pool, id); // Where is the item in the array?
+	if(index != -1) {
+		pool.splice(index, 1); // Remove the item from the pool array
+	}
+	
+	index = indexOf(pool, id); // Recursively check through until the item is no longer present in the pool at all
+	if(index != -1) {
+		poolRemove(pool, id);
+	}
+}
+
+
+function indexOf(array, val) { // This doesn't exist in ActionScript 2 for God knows what reason, just a workaround
+	var i;
+	for(i = 0; i < array.length; i++) {
+		if(array[i] == val) {
+			return i;
+		}
+	}
+	return -1;
 }
 
 // INIT ==============================================================================================
@@ -101,10 +163,16 @@ function overrideFunctions() { // Overrides the functions in vanilla isaac with 
 	balljunkOrig = _level0.a.balljunk;
 	_level0.a.balljunk = balljunk;
 	
-	haveTrinketOrig = _level0.a.trixx;
-	_level0.a.trixx = haveTrinket;
+	trixxOrig = _level0.a.trixx;
+	_level0.a.trixx = trixx;
 	
-	_level0.a.firr = firr;
+	itemzzOrig = _level0.a.itemzz;
+	_level0.a.itemzz = itemzz;
+	
+	giveitOrig = _level0.a.giveit;
+	_level0.a.giveit = giveit;
+	
+	_level0.a.firr = firr; // No need for the original here as it's a full override
 }
 
 function setupCustomDescriptions() { // Setup our custom descriptions to override the vanilla ones (or missing ones)
