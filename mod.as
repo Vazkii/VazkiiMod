@@ -107,8 +107,20 @@ function messWithPools() { // Called to change items around in the item pools
 	var libraryPool = _level0.ittt9;
 	var godRoomPool = _level0.ittt10;
 
-	poolRemove(shopPool, 147); // Move Notched Axe from the Shop Pool to the treasure Pool
+	poolRemove(shopPool, 147); // Move Notched Axe from the Shop Pool to the Regular Pool
 	regularPool.push(147);
+	
+	poolRemove(bossPool, 198); // Move the Box from the Boss Pool to the Shop Pool twice
+	shopPool.push(198, 198);
+	
+	if(_level0.a.SecretUnlocked[62] && rand(5) == 0) { // If Forget Me Now is unlocked, add it to the Shop Pool
+		shopPool.push(127);
+	}
+	
+	if(_level0.a.locker[75]) { // If Dad's Key is unlocked, move it from the Secret Room pool to the Regular Pool
+		poolRemove(shopPool, 175);
+		regularPool.push(175);
+	}
 	
 	messedWithItempools = true;
 }
@@ -134,6 +146,10 @@ function indexOf(array, val) { // This doesn't exist in ActionScript 2 for God k
 		}
 	}
 	return -1;
+}
+
+function rand(i) { // Random function that ses SpiderMod's random method, just an alias
+	return _level0.a.IntRandFn(10, i);
 }
 
 // INIT ==============================================================================================
@@ -208,6 +224,7 @@ function setupCustomDescriptions() { // Setup our custom descriptions to overrid
 	customDescriptions[183] = "Tears + Tear Speed"; // Tooth Picks
 	customDescriptions[188] = "On the other side"; // Abel
 	customDescriptions[190] = "Burn baby burn"; // Pyro
+	customDescriptions[194] = "Shot Speed + Tarrot Card"; // Mom's Coin Purs
 	customDescriptions[195] = "Medic!!"; // Mom's Coin Purse
 	customDescriptions[198] = "It's a box!"; // Box
 }
