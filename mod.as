@@ -1,3 +1,8 @@
+// Quick instructions for porting Isaac Code to SpiderMod Plugin
+// - Use the SpiderMod decompiled code, not the Isaac decompiled code
+// - Anything accessed through _root is accessed through _level0.
+// - Anything not accessed through _root is accessed through _level0.a.
+
 // ORIGINAL FUNCTIONS ================================================================================
 var powerlevelOrig = undefined;
 var displayCornerMessageOrig = undefined;
@@ -43,7 +48,7 @@ function firr(trg) { // Function called for calculating tear rate, completely ov
 	}
 
 // This code here made Eve have lower fire rate. NOT ANY MORE!
-//	if (_level0.a.skiner == 6) {
+//	if (_level0.skiner == 6) {
 //	  v3 -= 0.25;
 //	}
 
@@ -64,10 +69,24 @@ function firr(trg) { // Function called for calculating tear rate, completely ov
 	}
 }
 
-function balljunk() { // This checks if the player has the polaroid before opening up the chest, overriding it so it's not needed
+function balljunk() { // Called whenever a player interacts with anything, using it for various things
 	alwaysPolaroid = true; // Force the polaroid to be counted as equipped
 	balljunkOrig();
 	alwaysPolaroid = false; // Force it back so you get get actual "Permanent Polaroid Invincibility" ;)
+	
+	if(_level0.a.lows == _level0.a.player && _level0.a.highs.s == 5) {
+		var frame = _level0.a.highs.d._currentframe; // What we interacted with 
+		if(frame == 3) { // Key
+			if(_level0.a.highs.col == 2) { // Golden Key
+				++_level0.keys; // Give the player another key, even if the key picked up is golden
+				displayCornerMessage("Lucky!");
+			}
+			if(_level0.it == 135 && random(4) == 0) { // If the player has Dad's Key, chance for double key
+				++_level0.keys;
+				displayCornerMessage("Extra Key!");
+			}
+		}
+	}
 }
 
 function playerhurt(f1, f2, f3) { // Called when the player is hurt, just to prevent the player from always having polaroid
@@ -131,6 +150,11 @@ function messWithPools() { // Called to change items around in the item pools
 		devilRoomPool.push(105);
 	} else if(_level0.locker[65] && random(8) == 0) { // If the D6 wasn't in the Devil Pool and the D20 is unlocked, try adding it to the Devil Pool
 		devilRoomPool.push(166);
+	}
+	
+	if(_level0.locker[14]) { // If Spelunker Hat is unlocked, move it from the Item Room pool to the Shop Pool
+		poolRemove(regularPool, 14);
+		shopPool.push(14);
 	}
 	
 	messedWithItempools = true;
