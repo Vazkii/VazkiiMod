@@ -1,5 +1,6 @@
 // Quick instructions for porting Isaac Code to SpiderMod Plugin
 // - Use the SpiderMod decompiled code, not the Isaac decompiled code
+// - There's lots of swf decompilers. Flare is a good simple one for example
 // - Anything accessed through _root is accessed through _level0.
 // - Anything not accessed through _root is accessed through _level0.a.
 
