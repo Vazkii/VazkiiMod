@@ -1,10 +1,15 @@
 // ORIGINAL FUNCTIONS ================================================================================
 var powerlevelOrig = undefined;
 var displayCornerMessageOrig = undefined;
+var balljunkOrig = undefined;
+var playerhurtOrig = undefined;
+var haveTrinketOrig = undefined;
 
 // VARIABLES =========================================================================================
 var customDescriptions = Array(); // An array of all our custom item descriptions
 var pickedUpID = -1; // The ID of the last item picked up
+var alwaysPolaroid = false; // Should the polaroid always be counted as equipped? Used to allow entrance to the chest without it
+var takingDamage = false; // Is the player taking damage?
 
 // OVERRIDES =========================================================================================
 
@@ -53,6 +58,22 @@ function firr(trg) { // Function called for calculating tear rate, completely ov
 	}
 }
 
+function balljunk() { // This checks if the player has the polaroid before opening up the chest, overriding it so it's not needed
+	alwaysPolaroid = true; // Force the polaroid to be counted as equipped
+	balljunkOrig();
+	alwaysPolaroid = false; // Force it back so you get get actual "Permanent Polaroid Invincibility" ;)
+}
+
+function playerhurt(f1, f2, f3) { // Called when the player is hurt, just to prevent the player from always having polaroid
+	takingDamage = true;
+	playerhurtOrig(f1, f2, f3);
+	takingDamage = false;
+}
+
+function haveTrinket(id) { // Checks if the player has a trinket. Overriding so it allows for entering the chest without the polaroid
+	return (id == 47 && alwaysPolaroid && !takingDamage) || haveTrinketOrig(id);
+}
+
 // INIT ==============================================================================================
 
 this.onEnterFrame = function() { // Called for init
@@ -73,6 +94,15 @@ function overrideFunctions() { // Overrides the functions in vanilla isaac with 
 	
 	displayCornerMessageOrig = _level0.a.st22;
 	_level0.a.st22 = displayCornerMessage;
+	
+	playerhurtOrig = _level0.a.playerhurt;
+	_level0.a.playerhurt = playerhurt;
+	
+	balljunkOrig = _level0.a.balljunk;
+	_level0.a.balljunk = balljunk;
+	
+	haveTrinketOrig = _level0.a.trixx;
+	_level0.a.trixx = haveTrinket;
 	
 	_level0.a.firr = firr;
 }
