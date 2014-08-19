@@ -6,6 +6,8 @@ var displayCornerMessageOrig = undefined;
 var customDescriptions = Array(); // An array of all our custom item descriptions
 var pickedUpID = -1; // The ID of the last item picked up
 
+// OVERRIDES =========================================================================================
+
 function powerlevel() { // Function called when an item is picked up
 	pickedUpID = _level0.a.highs.it; // Keep the ID of the item we just picked up
 	powerLevelOrig();
@@ -67,6 +69,7 @@ function setupCustomDescriptions() { // Setup our custom descriptions to overrid
 	customDescriptions[118] = "We didn't take it in the last 69 runs!"; // Brimstone
 	customDescriptions[141] = "Now dance"; // Pageant Boy
 	customDescriptions[163] = "Casper?"; // Ghost Baby
+	customDescriptions[165] = "At least it's out of the pool"; // Cat-O-Nine-Tails
 	customDescriptions[167] = "Strabic Friend"; // Harlequein Baby
 	customDescriptions[168] = "It's a won run"; // Epic Fetus
 	customDescriptions[169] = "Big ass eye"; // Polyphemus
