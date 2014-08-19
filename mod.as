@@ -41,10 +41,12 @@ function firr(trg) { // Function called for calculating tear rate, completely ov
 	if (_level0.a.ups[120]) {
 	  ++v3;
 	}
-	
-	if (_level0.a.skiner == 6) {
-	  v3 -= 0.25;
-	}
+
+// This code here made Eve have lower fire rate. NOT ANY MORE!
+//	if (_level0.a.skiner == 6) {
+//	  v3 -= 0.25;
+//	}
+
 	f1 = Math.sqrt(Math.max(0, 1 + v3 * 1.3));
 	_level0.a.trg.fire = Math.max(5, 16 - f1 * 6 - Math.min(v3, 0) * 6);
 	if (_level0.a.ups[69]) {
@@ -113,13 +115,22 @@ function messWithPools() { // Called to change items around in the item pools
 	poolRemove(bossPool, 198); // Move the Box from the Boss Pool to the Shop Pool twice
 	shopPool.push(198, 198);
 	
-	if(_level0.a.SecretUnlocked[62] && rand(5) == 0) { // If Forget Me Now is unlocked, add it to the Shop Pool
+	if(_level0.locker[62] && random(5) == 0) { // If Forget Me Now is unlocked, add it to the Shop Pool
 		shopPool.push(127);
 	}
 	
-	if(_level0.a.locker[75]) { // If Dad's Key is unlocked, move it from the Secret Room pool to the Regular Pool
+	if(_level0.locker[75]) { // If Dad's Key is unlocked, move it from the Secret Room pool to the Regular Pool
 		poolRemove(shopPool, 175);
 		regularPool.push(175);
+	}
+	
+	poolRemove(regularPool, 6); // Move Number One to the Secret Room Pool
+	secretRoomPool.push(6);
+	
+	if(_level0.locker[38] && _level0.skiner != 0 && _level0.chala == 0 && random(4) == 0) { // If the D6 is unlocked, the player isn't playing as Isaac and not playing a challenge try adding D6 to the Devil Pool
+		devilRoomPool.push(105);
+	} else if(_level0.locker[65] && random(3) == 0) { // If the D6 wasn't in the Devil Pool and the D20 is unlocked, try adding it to the Devil Pool
+		devilRoomPool.push(166);
 	}
 	
 	messedWithItempools = true;
@@ -146,10 +157,6 @@ function indexOf(array, val) { // This doesn't exist in ActionScript 2 for God k
 		}
 	}
 	return -1;
-}
-
-function rand(i) { // Random function that ses SpiderMod's random method, just an alias
-	return _level0.a.IntRandFn(10, i);
 }
 
 // INIT ==============================================================================================
