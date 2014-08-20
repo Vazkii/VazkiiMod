@@ -7,7 +7,7 @@ Vazkii's Mod for The Binding of Isaac. Just a bunch of game tweaks
 - Added descriptions for every single item that does not have any.
 - Magic Mushroom and Toothpicks are now tear ups (0.2 and 0.3 respectively) as well as their old stats;
 - You can enter the Chest without the Polaroid.
-- Eve no longer has -0.25 fire rate by default.
+- Samson no longer has -0.25 fire rate by default.
 - Golden Keys now add 1 key to the Key Counter.
 - Having Dad's Key equipped gives a 25% chance for a key to add 2 to the counter instead of just 1.
 - Changed descriptions of some items to be more accurate.
