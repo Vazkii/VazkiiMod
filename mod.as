@@ -48,7 +48,7 @@ function firr(trg) { // Function called for calculating tear rate, completely ov
 	  ++v3;
 	}
 
-// This code here made Eve have lower fire rate. NOT ANY MORE!
+// This code here made Samson have lower fire rate. NOT ANY MORE!
 //	if (_level0.skiner == 6) {
 //	  v3 -= 0.25;
 //	}
